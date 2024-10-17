@@ -930,7 +930,6 @@ async def restart(update: Update, context: CallbackContext) -> int:
     await update.message.reply_text("Riavvio della conversazione...")
 
     # Resetta i dati utente
-    context.user_data.clear()  # Pulisci i dati dell'utente
     return await start(update, context)  # Ritorna allo stato iniziale
 
 
