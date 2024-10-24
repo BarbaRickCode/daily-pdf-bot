@@ -5,8 +5,6 @@ import logging
 from logging import exception
 from typing import List
 from telegram.ext import filters
-
-
 from genera_tabella import crea_tabella
 
 logging.basicConfig(level=logging.INFO)
@@ -936,7 +934,7 @@ async def restart(update: Update, context: CallbackContext) -> int:
 # Main function to set up the bot
 def main() -> None:
     # Create the bot and define the handlers
-    application = Application.builder().token("7883723109:AAFVf7e5Xaj-qORbjQ65SK4jTvvtvFJwXk8").build()
+    application = Application.builder().token("7883723109:AAHqv5uCfOE0rNK-sOxcFpsQNTYV03_O-7o").build()
 
     conv_handler = ConversationHandler(
         entry_points=[CommandHandler('start', start)],  # Initial state is /start
@@ -969,8 +967,10 @@ def main() -> None:
 
     application.add_handler(conv_handler)
     application.add_handler(MessageHandler(filters.Sticker.ALL, sticker_handler))  # Gestisce tutti gli adesivi
-    # Start the bot
-    application.run_polling()
+
+    # Avvia il bot con la porta di Render
+    port = int(os.environ.get("PORT", 5000))  # Usa la porta fornita da Render
+    application.run_polling(port=port)
 
 
 if __name__ == '__main__':
