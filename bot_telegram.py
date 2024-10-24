@@ -967,11 +967,8 @@ def main() -> None:
 
     application.add_handler(conv_handler)
     application.add_handler(MessageHandler(filters.Sticker.ALL, sticker_handler))  # Gestisce tutti gli adesivi
-
-    # Avvia il bot con la porta di Render
-    port = int(os.environ.get("PORT", 5000))  # Usa la porta fornita da Render
-    application.run_polling(port=port)
-
+    # Start the bot
+    application.run_polling()
 
 if __name__ == '__main__':
     main()
